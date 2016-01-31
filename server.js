@@ -1,15 +1,18 @@
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-var express = require('./server/config/express')
+const express = require('./server/config/express');
+const postgres = require('./server/config/postgres');
 
-var app = express();
+const app = express();
 
-app.set('port', (process.env.PORT || 3015));
+postgres.init(function() {
+  app.set('port', (process.env.PORT || 3015));
 
-var server = app.listen(app.get('port'), function () {
-  var host = server.address().address;
-  var port = server.address().port;
-  console.log('ApartementApi started at http://localhost:%s', port);
+  const server = app.listen(app.get('port'), function () {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log('ApartementApi started at http://localhost:%s', port);
+  });
 });
 
 module.exports = app;

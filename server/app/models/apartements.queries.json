@@ -9,15 +9,15 @@
       "price INTEGER",
       " );"
   ],
-  "selectByUsername": [
-    "SELECT * FROM persons",
-    " WHERE username = ($1)"
+  "selectByName": [
+    "SELECT * FROM apartements",
+    " WHERE name = ($1)"
   ],
   "selectAll": [
-    "SELECT * FROM persons;"
+    "SELECT * FROM apartements;"
   ],
-  "addPerson": [
-    "INSERT INTO persons VALUES",
-    " (DEFAULT, $1, $2, $3, $4, $5, $6);"
+  "addApartement": [
+    "INSERT INTO apartements VALUES",
+    " (DEFAULT, $1, $2, $3, $4, $5);"
   ]
 }
