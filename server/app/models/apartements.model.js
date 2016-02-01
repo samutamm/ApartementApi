@@ -5,7 +5,7 @@ const queries = require('./apartements.queries.json');
 const Apartement = require('./Apartement');
 
 function addToDBIfNotExists(apartement, callback) {
-  pg.connect(conString, function(err, client, done) {
+  connect(function(err, client, done) {
       client.query(getQuery(queries.selectByName), [apartement.name], function(err, results) {
         if(results.rows.length > 0) {
           done();
@@ -20,17 +20,46 @@ function addToDBIfNotExists(apartement, callback) {
   });
 }
 
+exports.getAll = function(callback) {
+  connect(function(err, client, done) {
+    client.query(getQuery(queries.selectAll), function(err, result) {
+      done();
+      callback(err, result);
+    });
+  });
+}
+
+exports.deleteAll = function(passphrase, callback) {
+    if (passphrase === 'ONLY FOR DEVELOPMENT USE') {
+      connect(function(err, client, done) {
+        client.query(getQuery(queries.dropTable), function(err, results) {
+          done();
+          callback(err, results);
+        });
+      });
+    } else {
+      callback('Only dev use', 'Only dev use');
+    }
+}
+
 exports.init = function(callback) {
   const test = new Apartement({
     name: 'Test', address: '20 Avenue Albert Einstein',
     city: 'VILLEURBANE', agent: 'Ville Välittäjä', price: 750
   });
-  pg.connect(conString, function(err, client, done) {
+  connect(function(err, client, done) {
     client.query(getQuery(queries.createTable), function(err, result) {
+      done();
       addToDBIfNotExists(test, function(err, result) {
         callback()
       });
     });
+  });
+}
+
+function connect(callback) {
+  pg.connect(conString, function(err, client, done) {
+    callback(err, client, done);
   });
 }
 
