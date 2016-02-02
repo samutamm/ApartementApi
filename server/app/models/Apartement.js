@@ -10,9 +10,9 @@ module.exports = class Apartement {
   }
 
   isValid() {
+    debugger;
     return this.name !== undefined && this.address !== undefined
-      && this.city !== undefined && this.agent !== undefined
-      && this.price !== undefined;
+      && this.city !== undefined && this.price !== undefined;
   }
 
   asAList() {

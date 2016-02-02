@@ -2,7 +2,7 @@ const pg = require('pg');
 const config = require('../../config/config');
 const conString = config.db.address;
 const queries = require('./apartements.queries.json');
-const Apartement = require('./Apartement');
+const Apartement = require('./Apartement.js');
 
 function addToDBIfNotExists(apartement, callback) {
   connect(function(err, client, done) {
@@ -26,6 +26,12 @@ exports.getAll = function(callback) {
       done();
       callback(err, result);
     });
+  });
+}
+
+exports.addApartement = function(apartement, callback) {
+  addToDBIfNotExists(apartement, function (err, results) {
+    callback(err, results);
   });
 }
 

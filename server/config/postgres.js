@@ -4,7 +4,6 @@ const async = require('async');
 exports.init = function(done) {
   async.series({
     initApartements: function(callback) {
-      console.log('INIT TABLE IF NOT EMPTY');
       apartementsModel.init(function() {
         callback(null, null);
       });
