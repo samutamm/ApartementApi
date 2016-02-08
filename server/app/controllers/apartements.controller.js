@@ -22,8 +22,7 @@ exports.addApartement = function (req, res) {
       if (err) {
         res.status(400).send(err);
       } else {
-        debugger;
-        res.send('bolblasd');
+        res.send(results.rows[0]);
       }
     });
   } else {

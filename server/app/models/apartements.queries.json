@@ -18,7 +18,7 @@
   ],
   "addApartement": [
     "INSERT INTO apartements VALUES",
-    " (DEFAULT, $1, $2, $3, $4, $5);"
+    " (DEFAULT, $1, $2, $3, $4, $5) RETURNING id;"
   ],
   "dropTable": [
     "DROP TABLE IF EXISTS apartements;"
