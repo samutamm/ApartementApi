@@ -1,8 +1,7 @@
 module.exports = {
-  sessionSecret: 'salainenSessio',
-  secretKey: 'asdasd',
+  secretKey: process.env.SECRET_KEY,
   db: {
-    address: 'postgres://postgres:@localhost/persons',
-    admin: 'passu'
+    address: process.env.DATABASE_URL,
+    admin: process.env.ADMIN_PASSWORD
   }
 }
